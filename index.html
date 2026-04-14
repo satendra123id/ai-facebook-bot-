@@ -2,12 +2,6 @@
 <html>
 <head>
 <title>AI Facebook Bot</title>
-
-<!-- ADS SPACE -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-</script>
-
 </head>
 
 <body>
@@ -15,17 +9,38 @@ src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
 <h2>AI Content Generator</h2>
 
 <input id="msg" placeholder="Type your idea">
-
 <button onclick="send()">Generate</button>
 
-<pre id="out"></pre>
+<pre id="result"></pre>
 
-<!-- AD AREA -->
 <div style="margin-top:40px">
-Advertisement
+Advertisement Area
 </div>
 
-<script src="app.js"></script>
+<script>
+
+async function send(){
+
+const message=document.getElementById("msg").value
+
+const res=await fetch("/chat",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:message
+})
+})
+
+const data=await res.json()
+
+document.getElementById("result").innerText=
+JSON.stringify(data,null,2)
+
+}
+
+</script>
 
 </body>
 </html>
